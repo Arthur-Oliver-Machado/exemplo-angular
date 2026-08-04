@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -9,6 +9,6 @@ import { FormsModule } from '@angular/forms';
 })
 export class ImagemDinamica {
 
-  protected urlImagem = '';
+  protected urlImagem = signal<string>('');
 
 }

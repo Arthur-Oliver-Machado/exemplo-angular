@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-autenticacao',
@@ -8,10 +8,12 @@ import { Component } from '@angular/core';
 })
 export class Autenticacao {
 
-  protected logado = false;
+  // protected logado = false;
+
+  protected logado = signal<boolean>(false);
 
   protected alterarEstado() {
-    this.logado = !this.logado;
+    this.logado.update(estado => !estado);
   }
 
 }

@@ -1,5 +1,5 @@
 <p>Você está 
-    @if (logado) {
+    @if (logado()) {
         logado
     } @else {
         deslogado
@@ -7,5 +7,5 @@
 </p>
 
 <button (click)="alterarEstado()">
-    @if (logado) {Deslogar} @else {Logar}
+    @if (logado()) {Deslogar} @else {Logar}
 </button>
