@@ -3,10 +3,11 @@ import { Contador } from "./contador/contador";
 import { Autenticacao } from "./autenticacao/autenticacao";
 import { ImagemDinamica } from "./imagem-dinamica/imagem-dinamica";
 import { ExemploSignal } from "./exemplo-signal/exemplo-signal";
+import { ArrayUsuarios } from "./array-usuarios/array-usuarios";
 
 @Component({
   selector: 'app-exercicios',
-  imports: [Contador, Autenticacao, ImagemDinamica, ExemploSignal],
+  imports: [Contador, Autenticacao, ImagemDinamica, ExemploSignal, ArrayUsuarios],
   templateUrl: './exercicios.html',
   styleUrl: './exercicios.css',
 })
