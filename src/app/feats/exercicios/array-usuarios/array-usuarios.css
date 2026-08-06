@@ -1,0 +1,12 @@
+:host {
+    display: flex;
+    gap: 15px;
+}
+
+.usuario-card {
+    display: flex;
+    flex-direction: column;
+    width: 300;
+    min-width: 100px;
+    border: 1px solid grey;
+}
