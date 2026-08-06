@@ -7,6 +7,7 @@ import { PropBinding } from './feats/prop-binding/prop-binding';
 import { TwoWayBind } from './feats/two-way-bind/two-way-bind';
 import { AlunosFavoritos } from './feats/alunos-favoritos/alunos-favoritos';
 import { Exercicios } from './feats/exercicios/exercicios';
+import { ExemploForm } from './feats/exemplo-form/exemplo-form';
 
 export const routes: Routes = [
 
@@ -18,6 +19,7 @@ export const routes: Routes = [
     { path: 'bind', component: TwoWayBind },
     { path: 'alunos', component: AlunosFavoritos },
     { path: 'exercicios', component: Exercicios },
+    { path: 'form', component: ExemploForm },
     { path: '', redirectTo: 'home', pathMatch: 'full' }
 
 ];
