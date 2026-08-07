@@ -25,6 +25,14 @@ export class Formulario {
     const produto = this.produtoModel();
 
     console.log(produto);
+
+    alert('Produto cadastrado!')
+
+    this.produtoModel.set({
+      titulo: '',
+      descricao: '',
+      preco: null
+    })
   }
 
 }
