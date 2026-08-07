@@ -12,3 +12,14 @@
     <button>Cadastrar produto</button>
 
 </form>
+
+
+@for (produto of produtos(); track produto.titulo) {
+
+    <h1>{{produto.titulo}}</h1>
+    <p>{{produto.descricao}}</p>
+    <p>{{produto.preco}}</p>
+
+} @empty {
+    <p>Não há itens disponíveis</p>
+}
