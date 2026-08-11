@@ -1,9 +1,20 @@
 <form (submit)="efetuarLogin($event)">
 
     <input type="email" placeholder="Email" [formField]="loginForm.email">
-    <input type="password" placeholder="Senha" [formField]="loginForm.senha">
+    @if (loginForm.email().touched() && loginForm.email().invalid()) {
+        @for (error of loginForm.email().errors(); track error.kind) {
+            <span>{{error.message}}</span>
+        }
+    }
 
-    <button>Fazer login</button>
+    <input type="password" placeholder="Senha" [formField]="loginForm.senha">
+    @if (loginForm.senha().touched() && loginForm.senha().invalid()) {
+        @for (error of loginForm.senha().errors(); track error.kind) {
+            <span>{{error.message}}</span>
+        }
+    }
+
+    <button [disabled]="loginForm().invalid()">Fazer login</button>
 
 </form>
 

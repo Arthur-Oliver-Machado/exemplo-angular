@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { LoginInterface } from './login-interface';
-import { form, FormField } from '@angular/forms/signals';
+import { email, form, FormField, required } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,12 @@ export class Login {
     senha: ''
   });
 
-  protected loginForm = form(this.loginModel);
+  protected loginForm = form(this.loginModel, (s) => {
+    required(s.email, {message: 'O email é obrigatório'});
+    email(s.email, {message: 'O email não condiz com um email'});
+
+    required(s.senha, {message: 'Senha é obrigatória'})
+  });
 
 
   protected estaLogado = signal<boolean>(false);
@@ -23,6 +28,7 @@ export class Login {
   protected efetuarLogin(event: SubmitEvent) {
     event.preventDefault();
 
+    alert('Foi feito o submit')
     const login = this.loginModel();
 
     if (login.email === 'henrique@email.com' && login.senha === 'senha') {
