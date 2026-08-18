@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Aluno } from './aluno';
 import { form, FormField, max, min, required } from '@angular/forms/signals';
+import { CadastroAlunosService } from './cadastro-alunos-service';
 
 @Component({
   selector: 'app-cadastro-alunos',
@@ -9,6 +10,11 @@ import { form, FormField, max, min, required } from '@angular/forms/signals';
   styleUrl: './cadastro-alunos.css',
 })
 export class CadastroAlunos {
+
+
+  protected readonly cadastroAlunosService = inject(CadastroAlunosService);
+
+
   // Fonte da verdade
   // Signal que guarda o estado atual dos dados do formulário.
   // Qualquer alteração no formulário atualiza este signal automaticamente.
@@ -30,7 +36,7 @@ export class CadastroAlunos {
   });
 
   // Signal que armazena a lista de alunos já cadastrados
-  protected alunos = signal<Aluno[]>([]);
+  // protected alunos = signal<Aluno[]>([]);
 
   // Método chamado no submit do formulário
   protected cadastrarAluno(event: SubmitEvent) {
@@ -39,8 +45,8 @@ export class CadastroAlunos {
     // Lê o valor atual do model (já sincronizado com o formulário)
     const aluno = this.alunoModel();
 
-    // Adiciona o novo aluno na lista de forma imutável
-    this.alunos.update(valor => [...valor, aluno]);
+    // Delega a função de adicionar o aluno na array para o service
+    this.cadastroAlunosService.cadastrarAluno(aluno);
 
     // Limpa o model (volta ao estado inicial)
     this.alunoModel.set({

@@ -31,7 +31,8 @@
 </form>
 
 <!-- Lista de alunos cadastrados (renderizada a partir do signal) -->
-@for (aluno of alunos(); track aluno.nome) {
+ <!-- A lista é obtida a partir da instância do objeto do service -->
+@for (aluno of cadastroAlunosService.alunos(); track aluno.nome) {
     <p>Nome: {{aluno.nome}}</p>
     <p>Média: {{aluno.media}}</p>
 
