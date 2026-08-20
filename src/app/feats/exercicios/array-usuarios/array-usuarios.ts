@@ -1,5 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Usuario } from './usuario';
+import { ArrayUsuariosService } from './array-usuarios-service';
 
 @Component({
   selector: 'app-array-usuarios',
@@ -9,23 +10,6 @@ import { Usuario } from './usuario';
 })
 export class ArrayUsuarios {
 
-  protected readonly usuarios = signal<Usuario[]>([
-    {
-      id: 1,
-      nome: 'Joãozinho',
-      idade: 19
-    },
-    {
-      id: 2,
-      nome: 'Maria',
-      idade: 22
-    },
-    {
-      id: 3,
-      nome: 'Ana',
-      idade: 18
-    }
-  ])
-
+  protected readonly arrayUsuariosService = inject(ArrayUsuariosService);
 
 }
