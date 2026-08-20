@@ -7,4 +7,6 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './home.css',
 })
-export class Home {}
+export class Home {
+
+}
