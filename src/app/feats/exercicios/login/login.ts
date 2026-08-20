@@ -13,7 +13,6 @@ export class Login {
 
   protected readonly loginService = inject(LoginService);
 
-
   protected loginModel = signal<LoginInterface>({
     email: '',
     senha: ''
@@ -34,17 +33,7 @@ export class Login {
 
     const login = this.loginModel();
 
-    const logou = this.loginService.autenticarUsuario(login);
-
-    if (logou === true) {
-      this.estaLogado.set(true);
-    } else {
-      this.estaLogado.set(false);
-    }
-
-    /* if (login.email === 'henrique@email.com' && login.senha === 'senha') {
-       this.estaLogado.set(true);
-     } */
+    this.estaLogado.set(this.loginService.autenticarUsuario(login));
 
     this.loginModel.set({
       email: '',
