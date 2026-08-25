@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { LoginInterface } from './login-interface';
 import { email, form, FormField, required } from '@angular/forms/signals';
+import { LoginService } from './login-service';
 
 @Component({
   selector: 'app-login',
@@ -10,16 +11,18 @@ import { email, form, FormField, required } from '@angular/forms/signals';
 })
 export class Login {
 
+  protected readonly loginService = inject(LoginService);
+
   protected loginModel = signal<LoginInterface>({
     email: '',
     senha: ''
   });
 
   protected loginForm = form(this.loginModel, (s) => {
-    required(s.email, {message: 'O email é obrigatório'});
-    email(s.email, {message: 'O email não condiz com um email'});
+    required(s.email, { message: 'O email é obrigatório' });
+    email(s.email, { message: 'O email não condiz com um email' });
 
-    required(s.senha, {message: 'Senha é obrigatória'})
+    required(s.senha, { message: 'Senha é obrigatória' })
   });
 
 
@@ -28,13 +31,16 @@ export class Login {
   protected efetuarLogin(event: SubmitEvent) {
     event.preventDefault();
 
-    alert('Foi feito o submit')
     const login = this.loginModel();
 
-    if (login.email === 'henrique@email.com' && login.senha === 'senha') {
-      this.estaLogado.set(true);
-    }
+    this.estaLogado.set(this.loginService.autenticarUsuario(login));
 
+    this.loginModel.set({
+      email: '',
+      senha: ''
+    })
+
+    this.loginForm().reset();
   }
 
 }
