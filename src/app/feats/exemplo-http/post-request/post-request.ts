@@ -37,6 +37,9 @@ export class PostRequest {
         });
 
         this.postForm().reset();
+      },
+      error: () => {
+        alert('Algo deu errado');
       }
     })
 
