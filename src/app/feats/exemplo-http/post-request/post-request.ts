@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { form, FormField } from "@angular/forms/signals";
 import { Post } from './post';
+import { ConsumoHttpService } from '../consumo-http-service';
 
 @Component({
   selector: 'app-post-request',
@@ -9,6 +10,8 @@ import { Post } from './post';
   styleUrl: './post-request.css',
 })
 export class PostRequest {
+
+  protected readonly consumoService = inject(ConsumoHttpService);
 
   protected readonly postModel = signal<Post>({
     userId: null,
@@ -23,17 +26,21 @@ export class PostRequest {
 
     const post = this.postModel();
 
-    // Aqui deveria ter o cadastro do usuário...
+    this.consumoService.cadastrarPostDoService(post).subscribe({
+      next: () => {
+        alert('Post cadastrado!')
 
-    alert('Post cadastrado!')
+        this.postModel.set({
+          userId: null,
+          title: '',
+          body: ''
+        });
 
-    this.postModel.set({
-      userId: null,
-      title: '',
-      body: ''
-    });
+        this.postForm().reset();
+      }
+    })
 
-    this.postForm().reset();
+
   }
 
 }
