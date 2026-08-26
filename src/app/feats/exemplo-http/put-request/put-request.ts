@@ -1,19 +1,20 @@
 import { Component, inject, signal } from '@angular/core';
-import { form, FormField } from "@angular/forms/signals";
-import { Post } from './post';
 import { ConsumoHttpService } from '../consumo-http-service';
+import { AtualizaPost } from './atualiza-post';
+import { form, FormField } from '@angular/forms/signals';
 
 @Component({
-  selector: 'app-post-request',
+  selector: 'app-put-request',
   imports: [FormField],
-  templateUrl: './post-request.html',
-  styleUrl: './post-request.css',
+  templateUrl: './put-request.html',
+  styleUrl: './put-request.css',
 })
-export class PostRequest {
+export class PutRequest {
 
   protected readonly consumoService = inject(ConsumoHttpService);
 
-  protected readonly postModel = signal<Post>({
+  protected readonly postModel = signal<AtualizaPost>({
+    id: null,
     userId: null,
     title: '',
     body: ''
@@ -21,23 +22,21 @@ export class PostRequest {
 
   protected readonly postForm = form(this.postModel);
 
-  protected cadastrarPost(event: SubmitEvent) {
+  protected atualizarPost(event: SubmitEvent) {
     event.preventDefault();
 
-    const post = this.postModel();
-
-    this.consumoService.cadastrarPostDoService(post).subscribe({
+    this.consumoService.atualizarPost(this.postModel()).subscribe({
       next: () => {
-        alert('Post cadastrado!')
-
+        alert('Atualização deu certo!!');
         this.postModel.set({
+          id: null,
           userId: null,
           title: '',
           body: ''
         });
-
         this.postForm().reset();
       },
+
       error: () => {
         alert('Algo deu errado');
       }
