@@ -27,8 +27,8 @@ export class PostRequest {
     const post = this.postModel();
 
     this.consumoService.cadastrarPostDoService(post).subscribe({
-      next: () => {
-        alert('Post cadastrado!')
+      next: (response) => {
+        alert('Post cadastrado com id: ' + response.id);
 
         this.postModel.set({
           userId: null,
