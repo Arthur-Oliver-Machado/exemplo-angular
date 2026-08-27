@@ -17,7 +17,7 @@ export class ConsumoHttpService {
     }
 
     atualizarPost(postAtualizado: AtualizaPost) {
-        return this.httpClient.put(this.urlApi + '/' + postAtualizado.id, postAtualizado);
+        return this.httpClient.put<PostResponse>(this.urlApi + '/' + postAtualizado.id, postAtualizado);
     }
 
     deletarPost(id: number) {
