@@ -26,8 +26,8 @@ export class PutRequest {
     event.preventDefault();
 
     this.consumoService.atualizarPost(this.postModel()).subscribe({
-      next: () => {
-        alert('Atualização deu certo!!');
+      next: (response) => {
+        alert('Atualização deu certo para a id ' + response.id);
         this.postModel.set({
           id: null,
           userId: null,
