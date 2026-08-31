@@ -11,4 +11,8 @@ export class GetRequest {
 
   protected readonly consumoService = inject(ConsumoHttpService);
 
+  protected recarregarPosts() {
+    this.consumoService.postsDetails.reload();
+  }
+
 }

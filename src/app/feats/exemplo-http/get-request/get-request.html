@@ -1,6 +1,11 @@
+<button (click)="recarregarPosts()">Recarregar</button>
+
 @if (consumoService.postsDetails.isLoading()) {
     <p>Carregando...</p>
-} @else {
+} @else if(consumoService.postsDetails.error()) {
+    <p>Deu erro</p>
+}
+@else if(consumoService.postsDetails.hasValue()) {
     @for (post of consumoService.postsDetails.value(); track post.id) {
         <h1>{{post.title}}</h1>
         <p>{{post.body}}</p>
